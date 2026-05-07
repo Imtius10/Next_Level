@@ -77,7 +77,7 @@ function toggleReadStatus(book: Book) {
   };
 }
 
-console.log(toggleReadStatus(myBook));
+
 
 
 
@@ -106,8 +106,7 @@ class Student extends Person {
   }
 }
 
-const student = new Student("Alice", 20, "A");
-student.getDetails();
+
 
 
 
