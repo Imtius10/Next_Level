@@ -1,64 +1,31 @@
-# TypeScript Assignment Solutions
+# TypeScript Assignment
 
-This repo contains a set of small TypeScript exercises implemented in `solutions.ts`.
+Minimal TypeScript assignment repository containing solution implementations and short technical blog posts.
 
-## Contents
+## Project Files
 
-`solutions.ts` includes the following functions/classes:
+- `solutions.ts` - Core assignment solutions (functions, generics, and OOP examples).
+- `blog-1.md` - How generics enable reusable, strictly typed code.
+- `blog-2.md` - OOP pillars in TypeScript with a practical example.
 
-1. `filterEvenNumbers(numbers: number[]): number[]`
-   Returns a new array containing only even numbers.
 
-2. `reverseString(str: string): string`
-   Reverses a string.
-
-3. `checkType(input: string | number): "String" | "Number" | "Unknown"`
-   Returns the runtime type label for the provided value.
-
-4. `getProperty<T, K extends keyof T>(obj: T, key: K): T[K]`
-   Type-safe property accessor using generics.
-
-5. `toggleReadStatus(book: Book): Book & { isRead: true }`
-   Returns a new book object with `isRead: true` added.
-
-6. `Person` and `Student`
-   `Student` extends `Person` and prints details via `getDetails()`.
-
-7. `getIntersection(array_1: number[], array_2: number[]): number[]`
-   Returns the intersection of two number arrays.
-
-## Running
-
-### Option A: Run directly with ts-node
-
-1. Install dependencies:
-
-```bash
-npm init -y
-npm i -D typescript ts-node
-```
-
-2. Execute:
+## Run the Solutions
 
 ```bash
 npx ts-node solutions.ts
 ```
 
+If `ts-node` is not installed:
 
-## Expected Console Output
-
-When you run `solutions.ts`, it currently logs results for problems 1, 3, 4, 5, 6, and 7:
-
-```txt
-[ 2, 4, 6 ]
-Number
-John Doe
-{
-  title: 'TypeScript Guide',
-  author: 'Jane Doe',
-  publishedYear: 2024,
-  isRead: true
-}
-Name: Alice, Age: 20, Grade: A
-[ 3, 4, 5 ]
+```bash
+npm i -D typescript ts-node
+npx ts-node solutions.ts
 ```
+
+## Scope
+
+This assignment demonstrates:
+
+- Type-safe utility functions
+- Generic programming with `keyof` and constraints
+- Basic class inheritance and object modeling in TypeScript
