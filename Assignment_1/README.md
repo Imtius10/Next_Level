@@ -44,21 +44,6 @@ npm i -D typescript ts-node
 npx ts-node solutions.ts
 ```
 
-### Option B: Compile with TypeScript and run with Node
-
-1. Install TypeScript:
-
-```bash
-npm init -y
-npm i -D typescript
-```
-
-2. Compile and run:
-
-```bash
-npx tsc solutions.ts --target ES2020 --module commonjs
-node solutions.js
-```
 
 ## Expected Console Output
 
