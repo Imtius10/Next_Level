@@ -62,7 +62,3 @@ John Doe
 Name: Alice, Age: 20, Grade: A
 [ 3, 4, 5 ]
 ```
-
-Notes:
-
-1. The `reverseString("typescript")` example is assigned to `r2` but not printed (the `console.log` is commented out).
