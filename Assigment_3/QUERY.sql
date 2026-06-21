@@ -5,7 +5,8 @@
 --               actual data types, relational keys, and check criteria.
 -- =========================================================================
 
--- DROP TABLES IF THEY ALREADY EXIST TO PREVENT CONFLICTS
+CREATE DATABASE Football_Match_Scheduler;
+
 DROP TABLE IF EXISTS Bookings;
 DROP TABLE IF EXISTS Matches;
 DROP TABLE IF EXISTS Users;
@@ -122,12 +123,15 @@ WHERE payment_status IS NULL;
 
 
 --4
-select bookings.booking_id ,
-       users.full_name
-    matches.fixture,bookings.total_cost
-from bookings 
-inner join users on users.user_id=bookings.user_id
-inner join matches on matches.match_id=bookings.match_id
+SELECT b.booking_id,
+       u.full_name,
+       m.fixture,
+       b.total_cost
+FROM Bookings b
+INNER JOIN Users u
+    ON b.user_id = u.user_id
+INNER JOIN Matches m
+    ON b.match_id = m.match_id;
 
 
 
@@ -138,7 +142,7 @@ SELECT u.user_id,
 FROM Users u
 LEFT JOIN Bookings b
     ON u.user_id = b.user_id
-ORDER BY u.user_id;
+
 
 
 
