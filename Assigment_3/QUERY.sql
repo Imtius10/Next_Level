@@ -14,40 +14,54 @@ DROP TABLE IF EXISTS Users;
 -- 1. CREATE USERS TABLE
 -- =========================================================================
 CREATE TABLE Users (
-    user_id INT PRIMARY KEY,
-    full_name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    role VARCHAR(50) NOT NULL,
-    phone_number VARCHAR(20)
+    user_id serial primary key,
+    full_name varchar(50) ,
+    email varchar(50) unique,
+    role varchar(20) not null,
+    phone_number varchar(20),
+    check(role in ('Ticket Manager', 'Football Fan'))
+    
+    -- Write your constraint to make 'user_id' the Primary Key
+    -- Write your constraint to ensure 'email' values are never duplicated
+    -- Write your check constraint to restrict 'role' to specific allowed strings
 );
 
 -- =========================================================================
 -- 2. CREATE MATCHES TABLE
 -- =========================================================================
 CREATE TABLE Matches (
-    match_id INT PRIMARY KEY,
-    fixture VARCHAR(150) NOT NULL,
-    tournament_category VARCHAR(100) NOT NULL,
-    base_ticket_price DECIMAL(10,2) NOT NULL,
-    match_status VARCHAR(50) NOT NULL
+    match_id serial primary key,
+    fixture varchar(50),
+    tournament_category varchar(50),
+    base_ticket_price  decimal(10,2),
+    match_status varchar(50),
+  check(base_ticket_price>0),
+ CHECK (match_status IN ('Available', 'Selling Fast', 'Sold Out', 'Postponed'))
+    
+    -- Write your constraint to make 'match_id' the Primary Key
+    -- Write your check constraint to prevent negative ticket prices
+    -- Write your check constraint to restrict 'match_status' values
 );
 
 -- =========================================================================
 -- 3. CREATE BOOKINGS TABLE
 -- =========================================================================
 CREATE TABLE Bookings (
-    booking_id INT PRIMARY KEY,
-    user_id INT NOT NULL,
-    match_id INT NOT NULL,
-    seat_number VARCHAR(20),
-    payment_status VARCHAR(50),
-    total_cost DECIMAL(10,2) NOT NULL,
-
-    FOREIGN KEY (user_id)
-        REFERENCES Users(user_id),
-
-    FOREIGN KEY (match_id)
-        REFERENCES Matches(match_id)
+    booking_id serial primary key,
+    user_id int,
+    match_id int,
+    seat_number varchar(20),
+    payment_status varchar(20),
+    total_cost decimal(10,2),
+    foreign key (user_id) references Users(user_id),
+    foreign key(match_id) references Matches(match_id),
+    check(total_cost>0),
+    check(payment_status in ('Pending', 'Confirmed', 'Cancelled', 'Refunded'))
+    -- Write your constraint to make 'booking_id' the Primary Key
+    -- Write your Foreign Key constraint linking 'user_id' to the Users table
+    -- Write your Foreign Key constraint linking 'match_id' to the Matches table
+    -- Write your check constraint to ensure 'total_cost' is non-negative
+    -- Write your check constraint to restrict 'payment_status' values
 );
 
 
@@ -86,6 +100,8 @@ select match_id,
   from matches 
   where tournament_category='Champions League' 
   and match_status='Available'
+
+    
 --2
 SELECT user_id,
        full_name,
@@ -93,6 +109,8 @@ SELECT user_id,
 FROM Users
 WHERE full_name ILIKE 'Tanvir%'
    OR full_name ILIKE '%Haque%';
+
+
 --3
 SELECT booking_id,
        user_id,
@@ -102,16 +120,16 @@ SELECT booking_id,
 FROM Bookings
 WHERE payment_status IS NULL;
 
+
 --4
-SELECT b.booking_id,
-       u.full_name,
-       m.fixture,
-       b.total_cost
-FROM Bookings b
-INNER JOIN Users u
-    ON b.user_id = u.user_id
-INNER JOIN Matches m
-    ON b.match_id = m.match_id;
+select bookings.booking_id ,
+       users.full_name
+    matches.fixture,bookings.total_cost
+from bookings 
+inner join users on users.user_id=bookings.user_id
+inner join matches on matches.match_id=bookings.match_id
+
+
 
 --5
 SELECT u.user_id,
@@ -121,6 +139,7 @@ FROM Users u
 LEFT JOIN Bookings b
     ON u.user_id = b.user_id
 ORDER BY u.user_id;
+
 
 
 --6
@@ -133,6 +152,8 @@ WHERE total_cost >
     SELECT AVG(total_cost)
     FROM Bookings
 );
+
+
 
 --7
 SELECT match_id,
