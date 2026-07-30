@@ -1,4 +1,0 @@
-model Review {
-    id String @id @default(uuid())
-    propertId String
-}
