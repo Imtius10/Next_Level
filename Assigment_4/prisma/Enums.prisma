@@ -1,0 +1,35 @@
+enum Role {
+    TENANT
+    LANDLORD
+    ADMIN
+}
+
+enum UserStatus {
+    ACTIVE
+    BANNED
+
+
+}
+
+enum AvailabilityStatus {
+
+    AVAILABLE
+    UNAVAILABE
+
+    
+}
+
+enum PriceUnit {
+    DAY
+    WEEK
+    MONTH
+}
+
+enum RentalRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
